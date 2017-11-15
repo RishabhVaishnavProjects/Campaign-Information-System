@@ -1,0 +1,11 @@
+$qry1="select max(chapterid) from chapter ";
+$result=mysql_query($qry1,$cn);
+ $rec=mysql_fetch_row($result);
+ $code=$rec[0];
+ $code++;
+ $cid="$code";     
+}
+else
+{
+    $cid="909";
+}

@@ -1,0 +1,193 @@
+<?php
+
+ # Init the MySQL Connection
+  if( !( $db = mysql_connect( 'localhost' , 'root' , '' ) ) )
+    die( 'Failed to connect to MySQL Database Server - #'.mysql_errno().': '.mysql_error();
+  if( !mysql_select_db( 'ram' ) )
+    die( 'Connected to Server, but Failed to Connect to Database - #'.mysql_errno().': '.mysql_error();
+
+ # Prepare the INSERT Query
+  $insertTPL = 'INSERT INTO `name` VALUES( "%s" , "%s" , "%s" , "%s" )';
+  $insertSQL = sprintf( $insertTPL ,
+                 mysql_real_escape_string( $name ) ,
+                 mysql_real_escape_string( $add1 ) ,
+                 mysql_real_escape_string( $add2 ) ,
+                 mysql_real_escape_string( $mail ) );
+ # Execute the INSERT Query
+  if( !( $insertRes = mysql_query( $insertSQL ) ) ){
+    echo '<p>Insert of Row into Database Failed - #'.mysql_errno().': '.mysql_error().'</p>';
+  }else{
+    echo '<p>Person\'s Information Inserted</p>'
+  }
+
+ # Prepare the SELECT Query
+  $selectSQL = 'SELECT * FROM `names`';
+ # Execute the SELECT Query
+  if( !( $selectRes = mysql_query( $selectSQL ) ) ){
+    echo 'Retrieval of data from Database Failed - #'.mysql_errno().': '.mysql_error();
+  }else{
+    ?>
+<table border="2">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Address Line 1</th>
+      <th>Address Line 2</th>
+      <th>Email Id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+      if( mysql_num_rows( $selectRes )==0 ){
+        echo '<tr><td colspan="4">No Rows Returned</td></tr>';
+      }else{
+        while( $row = mysql_fetch_assoc( $selectRes ) ){
+          echo "<tr><td>{$row['name']}</td><td>{$row['addr1']}</td><td>{$row['addr2']}</td><td>{$row['mail']}</td></tr>\n";
+        }
+      }
+    ?>
+  </tbody>
+</table>
+    <?php
+  }
+
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//first priority
+
+<!doctype html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <title>database connections</title>
+    </head>
+    <body>
+      <?php
+      $username = "database-username";
+      $password = "database-password";
+      $host = "localhost";
+
+      $connector = mysql_connect($host,$username,$password)
+          or die("Unable to connect");
+        echo "Connections are made successfully::";
+      $selected = mysql_select_db("test_db", $connector)
+        or die("Unable to connect");
+
+      //execute the SQL query and return records
+      $result = mysql_query("SELECT * FROM table_one ");
+      ?>
+      <table border="2" style= "background-color: #84ed86; color: #761a9b; margin: 0 auto;" >
+      <thead>
+        <tr>
+          <th>Employee_id</th>
+          <th>Employee_Name</th>
+          <th>Employee_dob</th>
+          <th>Employee_Adress</th>
+          <th>Employee_dept</th>
+          <td>Employee_salary</td>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+          while( $row = mysql_fetch_assoc( $result ) ){
+            echo
+            "<tr>
+              <td>{$row\['employee_id'\]}</td>
+              <td>{$row\['employee_name'\]}</td>
+              <td>{$row\['employee_dob'\]}</td>
+              <td>{$row\['employee_addr'\]}</td>
+              <td>{$row\['employee_dept'\]}</td>
+              <td>{$row\['employee_sal'\]}</td> 
+            </tr>\n";
+          }
+        ?>
+      </tbody>
+    </table>
+     <?php mysql_close($connector); ?>
+    </body>
+    </html>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//less proiority:-
+	
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>LoginDB</title>
+    </head>
+    <body>
+
+        <?php
+        $con=  mysqli_connect("localhost", "root", "", "detail");
+<!-- detail is the database in MySqli Database -->
+        if(!$con)
+       {
+           die('not connected');
+       }
+            $con=  mysqli_query($con, "select * from signup");
+<!-- signup is the table in the detail_Database -->
+       ?>
+        <div>
+            <td>Login Page Database</td>
+         <table border="1">
+            <th> First Name</th>
+                    <th>Last Name</th>
+                    <th>UserName</th>
+                     <th>Password</th>
+                    <th>Gender</th>
+                    <th>D.O.B.</th>
+                    <th>Phone Number</th>
+                    <th>Address</th>
+
+            </tr>
+
+        <?php
+
+             while($row=  mysqli_fetch_array($con))
+<!-- Fetch each row from signup Table  -->
+             {
+                 ?>
+            <tr>
+                <td><?php echo $row['FirstName']; ?></td>
+                <td><?php echo $row['LastName']; ?></td>
+                <td><?php echo $row['Username']; ?></td>
+                <td><?php echo $row['Password'] ;?></td>
+                <td><?php echo $row['Gender'] ;?></td>
+                <td><?php echo $row['DOB'] ;?></td>
+                <td><?php echo $row['PhoneNumber'] ;?></td>
+                <td><?php echo $row['Address'] ;?></td>
+            </tr>
+        <?php
+             }
+             ?>
+             </table>
+            </div>
+    </body>
+</html>
+

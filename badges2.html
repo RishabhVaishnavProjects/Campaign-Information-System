@@ -1,0 +1,56 @@
+<html>
+<head>
+<link rel="stylesheet" href="jquery-3.1.1.slim.js">
+<script src="jquery-3.1.1.min.js"></script>
+<script>
+$(document).ready(function()
+					{
+							var node = document.getElementById('mask123');
+							node.style.visibility = 'visible';
+						//$("#mask123").hide();
+						//var node = document.getElementById('mask123');
+						//alert("jkk");
+						//node.style.visibility = 'visible';
+						//$("#mask123").click(function(){$("#mask123").hide();})
+					});
+					
+					function function1()
+						{
+							alert("Hellooo");
+							$("#mask123").hide();
+							/*var node = document.getElementById('mask123');
+							if (node.style.visibility=='visible')
+							{
+								node.style.visibility = 'hidden';
+							}*/
+						}
+</script>
+<style>
+.badge1 {
+   position:relative;
+}
+.badge1[data-badge]:after {
+   content:attr(data-badge);
+   position:absolute;
+   top:-10px;
+   right:-10px;
+   font-size:20px;
+   background:green;
+   color:white;
+   width:48px;height:48px;
+   text-align:center;
+   line-height:44px;
+   border-radius:50%;
+   box-shadow:0 0 1px #333;
+}
+</style>
+</head>
+<body>
+</br>
+</br>
+</br>
+<ul>
+<li><a onclick="function1()" href="#"  id="linker">Notification<span class="badge1" style="visibility:hidden;" data-badge="1" id="mask123"></span></a></li>
+</ul>
+</body>
+</html>
